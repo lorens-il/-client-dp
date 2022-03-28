@@ -1,0 +1,37 @@
+{
+    "flights": [
+        {
+            "id": "GS 5633",
+            "departuteCity": "Екатеринбург",
+            "arrivalCity": "Уфа",
+            "departureAirport": "Кольцово",
+            "arrivalAirport": "Уфа",
+            "departureTime": "10-04-2022 15:00",
+            "arrivalTime": "10-04-2022 17:00",
+            "modelAirplane": "Boeng 737",
+            "cost": 2600
+        },
+        {
+            "id": "ОР 8780",
+            "departuteCity": "Москва",
+            "arrivalCity": "Владивосток",
+            "departureAirport": "Шереметьево",
+            "arrivalAirport": "Кневичи",
+            "departureTime": "04-04-2022 15:40",
+            "arrivalTime": "05-04-2022 06:55",
+            "modelAirplane": "Airbus 320",
+            "cost": 16885
+        },
+        {
+            "id": "SU 3643",
+            "departuteCity": "Москва",
+            "arrivalCity": "Новосибирск",
+            "departureAirport": "Шереметьево",
+            "arrivalAirport": "Толмачёво",
+            "departureTime": "08-04-2022 00:30",
+            "arrivalTime": "08-04-2022 08:25",
+            "modelAirplane": "Airbus 320",
+            "cost": 5140
+        }
+    ]
+}
