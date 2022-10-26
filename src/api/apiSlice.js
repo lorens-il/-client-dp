@@ -7,6 +7,9 @@ export const apiSlice = createApi({
         getStatus: builder.query({
             query: () => "/listStatus",
         }),
+        getTrainingMaterial: builder.query({
+            query: () => "/trainingMaterial",
+        }),
         // addPassenger: builder.mutation({
         //     query: value => ({
         //         url: "/success",
@@ -17,6 +20,7 @@ export const apiSlice = createApi({
     })
 });
 
-export const {useGetStatusQuery,
-              useAddPassengerMutation,                  
+export const {
+                useGetStatusQuery,
+                useGetTrainingMaterialQuery                 
 } = apiSlice;
