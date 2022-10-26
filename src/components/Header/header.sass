@@ -1,8 +1,29 @@
 .header
     padding: 25px
-    &__nav a
-        text-transform: uppercase
-        text-decoration: none
-        color: #000
+    &__nav 
+        display: flex
+        align-items: center
+        & a
+            text-transform: uppercase
+            text-decoration: none
+            color: #000
+            font-weight: 700
+            font-size: 18px
+            margin-right: 20px
+        & div
+            font-size: 18px
+            font-weight: 700
+
+.header
+    &__nav
+        display: flex
+        justify-content: space-between
+
+    & a
+        display: inline
+        font-size: 14px
         font-weight: 700
-        font-size: 18px
+        transition-duration: .6s
+        &:hover
+            color: #fff
+            

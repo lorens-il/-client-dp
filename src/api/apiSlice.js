@@ -4,10 +4,19 @@ export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({baseUrl:"http://localhost:3001"}),
     endpoints: builder => ({
-        getFlights: builder.query({
-            query: () => "/flights"
+        getStatus: builder.query({
+            query: () => "/listStatus",
         }),
+        // addPassenger: builder.mutation({
+        //     query: value => ({
+        //         url: "/success",
+        //         method: "POST",
+        //         body: value,
+        //     }),
+        // })
     })
 });
 
-export const {useGetFlightsQuery} = apiSlice;
+export const {useGetStatusQuery,
+              useAddPassengerMutation,                  
+} = apiSlice;
