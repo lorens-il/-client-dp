@@ -16,6 +16,14 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ["listStatus"]
         }),
+        changeStatus: builder.mutation({
+            query: ({id, ...values}) => ({
+                url: `/listStatus/${id}`,
+                method: "PUT",
+                body: values
+            }),
+            invalidatesTags: ["listStatus"]
+        }),
         getTrainingMaterial: builder.query({
             query: () => "/trainingMaterial",
         }),
@@ -32,5 +40,6 @@ export const apiSlice = createApi({
 export const {
                 useGetStatusQuery,
                 useDeleteStatusMutation,
+                useChangeStatusMutation,
                 useGetTrainingMaterialQuery                 
 } = apiSlice;

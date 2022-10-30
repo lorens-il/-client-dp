@@ -1,10 +1,10 @@
 {
   "listStatus": [
     {
-      "id": "GS 5633",
       "nameHardware": "Pantum M6500W",
-      "date": "06.06.2022",
-      "statusFix": "Диагностика"
+      "statusFix": "Ожидание запчастей",
+      "date": "30.10.2022",
+      "id": "GS 5633"
     },
     {
       "id": "ОР 8780",

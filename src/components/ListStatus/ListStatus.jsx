@@ -96,7 +96,7 @@ const ListStatus = () => {
                 <Link to="listStatus" className="btn btn-warning list-status__btn">Внести новую запись</Link>
             </div>
             <div className={`list-status__modal ${showModal === true ? 'active' : ''}`} onClick={(e) => closeModal(e)}>
-                <Modal statusId={statusId}/>
+                <Modal statusId={statusId} setShowModal={setShowModal}/>
             </div>
         </div>
     )
