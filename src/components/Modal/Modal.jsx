@@ -1,12 +1,18 @@
 import { Formik, Form, Field, ErrorMessage as ErrorForm } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { useChangeStatusReparedMutation, useAddStatusReparedMutation } from "../../api/apiQuery";
+import {setShowModal} from "../pages/ListStatus/listStatusSlice";
 import * as Yup from 'yup';
-import { useChangeStatusMutation } from "../../api/apiSlice";
 
 import "./Modal.sass";
 
-const Modal = ({statusId, setShowModal}) => {
+const Modal = () => {
     
-    const [changeStatus] = useChangeStatusMutation();
+    const [addStatusRepared] = useAddStatusReparedMutation();
+    const [changeStatusRepared] = useChangeStatusReparedMutation();
+
+    const {statusId, varSendMethod} = useSelector(state => state.listStatus);
+    const dispatch = useDispatch();
 
     return (
         <Formik
@@ -29,12 +35,19 @@ const Modal = ({statusId, setShowModal}) => {
                 }
             )}
             onSubmit={({date, ...values}, {resetForm}) => {
-                changeStatus({
+                const newStatusFix = {
                     id: statusId,
                     ...values,
                     date: new Date(date).toLocaleDateString('ru-RU')
-                });
-                setShowModal(false);
+                };
+
+                if (varSendMethod === "PUT") {
+                    changeStatusRepared(newStatusFix);
+                }
+                if (varSendMethod === "POST") {
+                    addStatusRepared(newStatusFix);
+                }
+                dispatch(setShowModal(false));
                 resetForm();
             }}
         >

@@ -1,5 +1,5 @@
 {
-  "listStatus": [
+  "reparedHardware": [
     {
       "nameHardware": "Pantum M6500W",
       "statusFix": "Ожидание запчастей",
@@ -23,6 +23,32 @@
       "nameHardware": "Epson L805",
       "date": "06.05.2022",
       "statusFix": "Отдано заказчику"
+    }
+  ],
+  "orderedHardware": [
+    {
+      "id": "RE 4556",
+      "nameHardware": "Xerox WorkCentre B235DNI",
+      "statusFix": "Заказано",
+      "date": "30.10.2022"
+    },
+    {
+      "id": "ОР 5653",
+      "nameHardware": "Pantum M6507",
+      "date": "01.06.2022",
+      "statusFix": "Доставляется"
+    },
+    {
+      "id": "JK 7282",
+      "nameHardware": "HP Laser 137fnw",
+      "date": "05.05.2022",
+      "statusFix": "Получено"
+    },
+    {
+      "id": "OH 1745",
+      "nameHardware": "Brother MFC-1815R",
+      "date": "06.05.2022",
+      "statusFix": "Выдано заказчику"
     }
   ],
   "trainingMaterial": [

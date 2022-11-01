@@ -1,8 +1,10 @@
 import React from 'react';
-import FlightsList from '../ListStatus/ListStatus';
+import ListStatus from '../pages/ListStatus/ListStatus';
 import Header from '../Header/Header';
 import {Routes, Route} from "react-router-dom";
 import TrainingMaterial from '../TrainingMaterial/TrainingMaterial';
+import ListStatusReparedHardware from '../ListStatusReparedHardware/ListStatusReparedHardware';
+import ListStatusOrderedHardware from '../ListStatusOrderedHardware/ListStatusOrderedHardware';
 
 function App() {
   return (
@@ -10,8 +12,21 @@ function App() {
         <Header/>
         <main>
         <Routes>
-          <Route path='/' element={<FlightsList/>}/>
-          <Route path='/training-material' element={<TrainingMaterial/>}/>
+            <Route 
+                path='/status-repaired-hardware' 
+                element={
+                    <ListStatus >
+                        <ListStatusReparedHardware/>
+                    </ListStatus>}
+            />
+            <Route 
+                path='/status-ordered-hardware' 
+                element={
+                    <ListStatus>
+                        <ListStatusOrderedHardware/>
+                    </ListStatus>}
+            />
+            <Route path='/training-material' element={<TrainingMaterial/>}/>
         </Routes>
         </main>
       </>

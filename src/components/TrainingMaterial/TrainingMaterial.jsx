@@ -1,6 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import { useGetTrainingMaterialQuery } from '../../api/apiSlice';
+import { useGetTrainingMaterialQuery } from '../../api/apiQuery';
 
 import './trainingMaterial.sass';
 

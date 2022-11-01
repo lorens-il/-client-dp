@@ -9,8 +9,8 @@ const Header = () => {
                 <div className="header__wrapper-menu">
                     <Link to="/">Новости</Link>
                     <Link to="/training-material">Обучающий материал</Link>
-                    <Link to="/">Статус заказанного оборудования</Link>
-                    <Link to="/">Статус ремонтно-диагностических работ</Link>
+                    <Link to="/status-ordered-hardware">Статус заказанного оборудования</Link>
+                    <Link to="/status-repaired-hardware">Статус ремонтно-диагностических работ</Link>
                     <Link to="/">О компании</Link>
                 </div>
                 <div className="header__wrapper-menu">
