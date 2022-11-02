@@ -1,4 +1,4 @@
-import { useGetStatusOrderedQuery } from '../../api/apiQuery';
+import { useGetStatusOrderedQuery, useDeleteStatusOrderedMutation } from '../../api/apiQuery';
 import useChangeStatusList from '../../hooks/useChangeStatusList';
 
 const ListStatusOrderedHardware = () => {
@@ -9,15 +9,16 @@ const ListStatusOrderedHardware = () => {
         isError 
     } = useGetStatusOrderedQuery();
 
-    // const [delHardware] = useDeleteStatusReparedMutation();
-
-    // const deletingHardwareById = (id) => {
-    //     delHardware(id);
-    // };
+    const [delHardware] = useDeleteStatusOrderedMutation();
 
     const changeStatusList = useChangeStatusList();
 
+    const deletingHardwareById = id => {
+        delHardware(id);
+    };
+
     const listCreatings = (hardware) => {
+
         if (hardware.length === 0) {
             return (
                 <tr className="list-status__empty">
@@ -34,12 +35,13 @@ const ListStatusOrderedHardware = () => {
                 <td className="list-status__wrapper-management">
                     <button
                         className="btn btn-warning list-status__btn list-status__btn_small"
-                        onClick={() => changeStatusList(id)}>
+                        onClick={() => changeStatusList(id)}
+                        >
                         Внести изменения
                     </button>
                     <button
                         className="btn btn-danger list-status__btn list-status__btn_small"
-                        // onClick={() => deletingHardwareById(id)}
+                        onClick={() => deletingHardwareById(id)}
                         >
                         Удалить
                     </button>

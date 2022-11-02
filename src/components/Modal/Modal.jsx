@@ -1,6 +1,12 @@
 import { Formik, Form, Field, ErrorMessage as ErrorForm } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useChangeStatusReparedMutation, useAddStatusReparedMutation } from "../../api/apiQuery";
+import { useLocation } from "react-router-dom";
+import { 
+    useChangeStatusReparedMutation, 
+    useAddStatusReparedMutation, 
+    useAddStatusOrderedMutation,
+    useChangeStatusOrderedMutation
+} from "../../api/apiQuery";
 import {setShowModal} from "../pages/ListStatus/listStatusSlice";
 import * as Yup from 'yup';
 
@@ -10,9 +16,41 @@ const Modal = () => {
     
     const [addStatusRepared] = useAddStatusReparedMutation();
     const [changeStatusRepared] = useChangeStatusReparedMutation();
+    const [addStatusOrdered] = useAddStatusOrderedMutation();
+    const [changeStatusOrdered] = useChangeStatusOrderedMutation();
 
     const {statusId, varSendMethod} = useSelector(state => state.listStatus);
     const dispatch = useDispatch();
+    const {pathname} = useLocation();
+
+    const urlStatusRepaired = "/status-repaired-hardware";
+    const urlStatusOrdered = "/status-ordered-hardware";
+
+    const onSubmitForm = ({date, ...values}, {resetForm}) => {
+
+        const newStatus = {
+            id: statusId,
+            ...values,
+            date: new Date(date).toLocaleDateString('ru-RU')
+        };
+
+        if (varSendMethod === "PUT" && pathname === urlStatusRepaired) {
+            changeStatusRepared(newStatus);
+        }
+        if (varSendMethod === "PUT" && pathname === urlStatusOrdered) {
+            changeStatusOrdered(newStatus);
+        }
+
+        if (varSendMethod === "POST" && pathname === urlStatusRepaired) {
+            addStatusRepared(newStatus);
+        }
+        if (varSendMethod === "POST" && pathname === urlStatusOrdered) {
+            addStatusOrdered(newStatus);
+        }
+
+        dispatch(setShowModal(false));
+        resetForm();
+    };
 
     return (
         <Formik
@@ -20,7 +58,7 @@ const Modal = () => {
                 {
                     nameHardware: '',
                     date: '',
-                    statusFix: 'Диагностика'
+                    statusFix: pathname === urlStatusRepaired ? 'Диагностика' : 'Заказано'
                 }
             }
             validationSchema={Yup.object(
@@ -34,27 +72,12 @@ const Modal = () => {
                                 .required('Обязательное поле!'),
                 }
             )}
-            onSubmit={({date, ...values}, {resetForm}) => {
-                const newStatusFix = {
-                    id: statusId,
-                    ...values,
-                    date: new Date(date).toLocaleDateString('ru-RU')
-                };
-
-                if (varSendMethod === "PUT") {
-                    changeStatusRepared(newStatusFix);
-                }
-                if (varSendMethod === "POST") {
-                    addStatusRepared(newStatusFix);
-                }
-                dispatch(setShowModal(false));
-                resetForm();
-            }}
-        >
+            onSubmit={onSubmitForm}
+            >
             <Form className="modal">
                 <h2 className="modal__title">Изменение статуса</h2>
                 <div className="modal__input-wrapper">
-                    <label className="modal__label" htmlFor="nameHardware">Имя оборудования</label>
+                    <label className="modal__label" htmlFor="nameHardware">Название оборудования</label>
                     <ErrorForm className="modal__error" name="nameHardware" component="div" />
                     <Field
                         id="nameHardware"
@@ -72,20 +95,34 @@ const Modal = () => {
                     />
                     <label className="modal__label" htmlFor="statusFix">Статус ремонта</label>
                     <ErrorForm className="modal__error" name="statusFix" component="div" />
-                    <Field
-                        className="modal__input"
-                        id="statusFix"
-                        name="statusFix"
-                        type="statusFix"
-                        as="select">
-                            <option value="Диагностика">Диагностика</option>
-                            <option value="Ожидание запчастей">Ожидание запчастей</option>
-                            <option value="Исправление неисправности">Исправление неисправности</option>
-                            <option value="Отремонтировано">Отремонтировано</option>
-                            <option value="Отдано заказчику">Отдано заказчику</option>
-                    </Field>
-                    
-                    <button className="btn btn-warning modal__btn" type="submit">Изменить</button>
+                    {
+                        pathname === urlStatusRepaired ? 
+                            <Field
+                                className="modal__input"
+                                id="statusFix"
+                                name="statusFix"
+                                type="statusFix"
+                                as="select">
+                                    <option value="Диагностика">Диагностика</option>
+                                    <option value="Ожидание запчастей">Ожидание запчастей</option>
+                                    <option value="Исправление неисправности">Исправление неисправности</option>
+                                    <option value="Отремонтировано">Отремонтировано</option>
+                                    <option value="Отдано заказчику">Отдано заказчику</option>
+                            </Field> 
+                        :
+                            <Field
+                                className="modal__input"
+                                id="statusFix"
+                                name="statusFix"
+                                type="statusFix"
+                                as="select">
+                                    <option value="Заказано">Заказано</option>
+                                    <option value="Доставляется">Доставляется</option>
+                                    <option value="Получено">Получено</option>
+                                    <option value="Выдано заказчику">Выдано заказчику</option>
+                            </Field>
+                    }
+                    <button className="btn btn-warning modal__btn" type="submit">{varSendMethod === "PUT" ? "Изменить" : "Добавить"}</button>
                 </div>
                 
             </Form>

@@ -29,14 +29,14 @@
     {
       "id": "RE 4556",
       "nameHardware": "Xerox WorkCentre B235DNI",
-      "date": "30.10.2022",
-      "statusFix": "Заказано"
+      "statusFix": "Заказано",
+      "date": "30.10.2022"
     },
     {
-      "id": "ОР 5653",
       "nameHardware": "Pantum M6507",
-      "date": "01.06.2022",
-      "statusFix": "Доставляется"
+      "statusFix": "Доставляется",
+      "date": "03.11.2022",
+      "id": "ОР 5653"
     },
     {
       "id": "JK 7282",
@@ -49,6 +49,12 @@
       "nameHardware": "Brother MFC-1815R",
       "date": "06.05.2022",
       "statusFix": "Выдано заказчику"
+    },
+    {
+      "id": "9b9ac3d2-fe93-4f3e-9ec8-ceb6f5cb2e0c",
+      "nameHardware": "sadsd",
+      "statusFix": "Заказано",
+      "date": "03.11.2022"
     }
   ],
   "trainingMaterial": [

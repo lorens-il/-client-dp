@@ -37,6 +37,29 @@ export const apiQuery = createApi({
             query: () => "/orderedHardware",
             providesTags: ["orderedHardware"]
         }),
+        addStatusOrdered: builder.mutation({
+            query: newStatusOrdered => ({
+                url: '/orderedHardware',
+                method: "POST",
+                body: newStatusOrdered
+            }),
+            invalidatesTags: ["orderedHardware"]
+        }),
+        deleteStatusOrdered: builder.mutation({
+            query: id => ({
+                url: `/orderedHardware/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["orderedHardware"]
+        }),
+        changeStatusOrdered: builder.mutation({
+            query: ({id, ...values}) => ({
+                url: `/orderedHardware/${id}`,
+                method: "PUT",
+                body: values
+            }),
+            invalidatesTags: ["orderedHardware"]
+        }),
 
         getTrainingMaterial: builder.query({
             query: () => "/trainingMaterial",
@@ -51,6 +74,9 @@ export const {
                 useChangeStatusReparedMutation,
 
                 useGetStatusOrderedQuery,
+                useAddStatusOrderedMutation,
+                useDeleteStatusOrderedMutation,
+                useChangeStatusOrderedMutation,
                 
                 useGetTrainingMaterialQuery                 
 } = apiQuery;
