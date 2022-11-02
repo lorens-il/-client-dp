@@ -1,7 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useGetStatusOrderedQuery } from '../../api/apiQuery';
-import { setShowModal, setStatusId, setVarSendMethod } from '../pages/ListStatus/listStatusSlice';
+import useChangeStatusList from '../../hooks/useChangeStatusList';
 
 const ListStatusOrderedHardware = () => {
 
@@ -13,17 +11,11 @@ const ListStatusOrderedHardware = () => {
 
     // const [delHardware] = useDeleteStatusReparedMutation();
 
-    const dispatch = useDispatch();
-
     // const deletingHardwareById = (id) => {
     //     delHardware(id);
     // };
 
-    const openModal = (id, method = 'PUT') => {
-        dispatch(setShowModal(true));
-        dispatch(setStatusId(id));
-        dispatch(setVarSendMethod(method));
-    };
+    const changeStatusList = useChangeStatusList();
 
     const listCreatings = (hardware) => {
         if (hardware.length === 0) {
@@ -42,7 +34,7 @@ const ListStatusOrderedHardware = () => {
                 <td className="list-status__wrapper-management">
                     <button
                         className="btn btn-warning list-status__btn list-status__btn_small"
-                        onClick={() => openModal(id)}>
+                        onClick={() => changeStatusList(id)}>
                         Внести изменения
                     </button>
                     <button

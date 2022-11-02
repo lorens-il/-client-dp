@@ -1,10 +1,10 @@
 {
   "reparedHardware": [
     {
+      "id": "GS 5633",
       "nameHardware": "Pantum M6500W",
-      "statusFix": "Ожидание запчастей",
       "date": "30.10.2022",
-      "id": "GS 5633"
+      "statusFix": "Ожидание запчастей"
     },
     {
       "id": "ОР 8780",
@@ -29,8 +29,8 @@
     {
       "id": "RE 4556",
       "nameHardware": "Xerox WorkCentre B235DNI",
-      "statusFix": "Заказано",
-      "date": "30.10.2022"
+      "date": "30.10.2022",
+      "statusFix": "Заказано"
     },
     {
       "id": "ОР 5653",
