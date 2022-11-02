@@ -1,10 +1,10 @@
 {
   "reparedHardware": [
     {
-      "id": "GS 5633",
       "nameHardware": "Pantum M6500W",
-      "date": "30.10.2022",
-      "statusFix": "Ожидание запчастей"
+      "statusFix": "Диагностика",
+      "date": "03.11.2022",
+      "id": "GS 5633"
     },
     {
       "id": "ОР 8780",
@@ -49,12 +49,6 @@
       "nameHardware": "Brother MFC-1815R",
       "date": "06.05.2022",
       "statusFix": "Выдано заказчику"
-    },
-    {
-      "id": "9b9ac3d2-fe93-4f3e-9ec8-ceb6f5cb2e0c",
-      "nameHardware": "sadsd",
-      "statusFix": "Заказано",
-      "date": "03.11.2022"
     }
   ],
   "trainingMaterial": [

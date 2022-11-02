@@ -6,7 +6,7 @@ const useChangeStatusList = () => {
     const dispatch = useDispatch();
 
     return (id, method = 'PUT') => {
-
+        document.documentElement.style.overflow = "hidden";
         dispatch(setShowModal(true));
         dispatch(setStatusId(id));
         dispatch(setVarSendMethod(method));

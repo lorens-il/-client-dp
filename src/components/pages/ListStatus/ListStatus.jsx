@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setShowModal, setStatusId, setVarSendMethod } from "./listStatusSlice";
+import { setShowModal } from "./listStatusSlice";
 import { useLocation } from "react-router-dom";
 import { Table } from "react-bootstrap"
 import { v4 as uuidv4 } from 'uuid';
 
 import Modal from "../../Modal/Modal";
+import useChangeStatusList from "../../../hooks/useChangeStatusList";
 
 import "./listStatus.sass";
 
@@ -15,20 +16,17 @@ const ListStatus = (props) => {
 
     const {pathname} = useLocation();
 
-    const openModal = (id, method = "PUT") => {
-        dispatch(setShowModal(true));
-        dispatch(setStatusId(id));
-        dispatch(setVarSendMethod(method));
-    }
+    const changeStatusList = useChangeStatusList();
 
     const closeModal = (e) => {
         if(e.target.classList.contains('list-status__modal')) {
             dispatch(setShowModal(false));
+            document.documentElement.style.overflow = "auto";
         }
     }
 
     const addNewStatus = () => {
-        openModal(uuidv4(), "POST");
+        changeStatusList(uuidv4(), "POST");
     }
 
     return (

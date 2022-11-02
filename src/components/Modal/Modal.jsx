@@ -50,6 +50,7 @@ const Modal = () => {
 
         dispatch(setShowModal(false));
         resetForm();
+        document.documentElement.style.overflow = "auto";
     };
 
     return (
@@ -58,7 +59,7 @@ const Modal = () => {
                 {
                     nameHardware: '',
                     date: '',
-                    statusFix: pathname === urlStatusRepaired ? 'Диагностика' : 'Заказано'
+                    statusFix: ''
                 }
             }
             validationSchema={Yup.object(
@@ -102,7 +103,9 @@ const Modal = () => {
                                 id="statusFix"
                                 name="statusFix"
                                 type="statusFix"
-                                as="select">
+                                as="select"
+                                >
+                                    <option value="">Выберите статус</option>
                                     <option value="Диагностика">Диагностика</option>
                                     <option value="Ожидание запчастей">Ожидание запчастей</option>
                                     <option value="Исправление неисправности">Исправление неисправности</option>
@@ -115,7 +118,9 @@ const Modal = () => {
                                 id="statusFix"
                                 name="statusFix"
                                 type="statusFix"
-                                as="select">
+                                as="select"
+                                >
+                                    <option value="">Выберите статус</option>
                                     <option value="Заказано">Заказано</option>
                                     <option value="Доставляется">Доставляется</option>
                                     <option value="Получено">Получено</option>
