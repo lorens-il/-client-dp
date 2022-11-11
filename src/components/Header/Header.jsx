@@ -7,7 +7,7 @@ const Header = () => {
         <header className="header bg-warning">
             <nav className="header__nav">
                 <div className="header__wrapper-menu">
-                    <Link to="/">Новости</Link>
+                    <Link to="/news">Новости</Link>
                     <Link to="/training-material">Обучающий материал</Link>
                     <Link to="/status-ordered-hardware">Статус заказанного оборудования</Link>
                     <Link to="/status-repaired-hardware">Статус ремонтно-диагностических работ</Link>

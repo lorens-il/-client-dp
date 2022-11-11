@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
+const domains = "domains=ferra.ru,lifehacker.ru,computerra.ru,ixbt.com,overclockers.ru,cnews.ru,rg.ru,mysku.club,hi-tech.mail.ru,habr.com,vz.ru"
+
 export const apiQuery = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({baseUrl:"http://localhost:3001"}),
@@ -63,6 +65,9 @@ export const apiQuery = createApi({
 
         getTrainingMaterial: builder.query({
             query: () => "/trainingMaterial",
+        }),
+        getNews: builder.query({
+            query: () => `https://newsapi.org/v2/everything?q=принтер OR мфу OR (сканер+принтер) OR (сканер+мфу) OR картридж OR тонер&${domains}&apiKey=adcc098530244f92ac18c84a90fa36df`
         })
     })
 });
@@ -78,5 +83,7 @@ export const {
                 useDeleteStatusOrderedMutation,
                 useChangeStatusOrderedMutation,
                 
-                useGetTrainingMaterialQuery                 
+                useGetTrainingMaterialQuery,
+                
+                useGetNewsQuery
 } = apiQuery;
