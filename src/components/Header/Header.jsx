@@ -10,7 +10,7 @@ const Header = () => {
                     <Link to="/training-material">Обучающий материал</Link>
                     <Link to="/status-ordered-hardware">Статус заказанного оборудования</Link>
                     <Link to="/status-repaired-hardware">Статус ремонтно-диагностических работ</Link>
-                    <Link to="/">О компании</Link>
+                    <Link to="/about">О компании</Link>
                 </div>
                 <div className="header__wrapper-menu">
                     <Link to="/">Вход</Link>   

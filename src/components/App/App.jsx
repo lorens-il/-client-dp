@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom";
 import TrainingMaterial from '../TrainingMaterial/TrainingMaterial';
 import ListStatusReparedHardware from '../ListStatusReparedHardware/ListStatusReparedHardware';
 import ListStatusOrderedHardware from '../ListStatusOrderedHardware/ListStatusOrderedHardware';
+import AboutCompany from '../pages/AboutCompany/AboutCompany';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                     </ListStatus>}
             />
             <Route path='/training-material' element={<TrainingMaterial/>}/>
+            <Route path='/about' element={<AboutCompany/>}/>
         </Routes>
         </main>
       </>
