@@ -4,7 +4,7 @@ const domains = "domains=ferra.ru,lifehacker.ru,computerra.ru,ixbt.com,overclock
 
 export const apiQuery = createApi({
     reducerPath: "api",
-    baseQuery: fetchBaseQuery({baseUrl:"http://localhost:3001"}),
+    baseQuery: fetchBaseQuery({baseUrl:"http://localhost:3002"}),
     tagTypes: ["reparedHardware", "orderedHardware"],
     endpoints: builder => ({
         getStatusRepared: builder.query({

@@ -4,9 +4,10 @@ import { useLocation } from "react-router-dom";
 import { 
     useChangeStatusReparedMutation, 
     useAddStatusReparedMutation, 
-    useAddStatusOrderedMutation,
-    useChangeStatusOrderedMutation
+    useAddStatusOrderedMutation
 } from "../../api/apiQuery";
+import {useMutation} from "@apollo/client";
+import { ADD_HARDWARE, UPDATE_HARDWARE } from "../../api/apollo/hardware";
 import {setShowModal} from "../pages/ListStatus/listStatusSlice";
 import * as Yup from 'yup';
 
@@ -16,8 +17,8 @@ const Modal = () => {
     
     const [addStatusRepared] = useAddStatusReparedMutation();
     const [changeStatusRepared] = useChangeStatusReparedMutation();
-    const [addStatusOrdered] = useAddStatusOrderedMutation();
-    const [changeStatusOrdered] = useChangeStatusOrderedMutation();
+    const [addStatusOrdered] = useMutation(ADD_HARDWARE);
+    const [changeStatusOrdered] = useMutation(UPDATE_HARDWARE);
 
     const {statusId, varSendMethod} = useSelector(state => state.listStatus);
     const dispatch = useDispatch();
@@ -29,23 +30,24 @@ const Modal = () => {
     const onSubmitForm = ({date, ...values}, {resetForm}) => {
 
         const newStatus = {
-            id: statusId,
+            id: varSendMethod === "PUT" ? statusId : 3, // вместо трёх получать id работника из localStorage
             ...values,
-            date: new Date(date).toLocaleDateString('ru-RU')
+            date: date,
+            category: pathname === urlStatusOrdered ? "ordered" : "repaired"
         };
 
         if (varSendMethod === "PUT" && pathname === urlStatusRepaired) {
             changeStatusRepared(newStatus);
         }
         if (varSendMethod === "PUT" && pathname === urlStatusOrdered) {
-            changeStatusOrdered(newStatus);
+            changeStatusOrdered({variables: {input: newStatus}});
         }
 
         if (varSendMethod === "POST" && pathname === urlStatusRepaired) {
             addStatusRepared(newStatus);
         }
         if (varSendMethod === "POST" && pathname === urlStatusOrdered) {
-            addStatusOrdered(newStatus);
+            addStatusOrdered({variables: {input: newStatus}});
         }
 
         dispatch(setShowModal(false));
@@ -57,18 +59,18 @@ const Modal = () => {
         <Formik
             initialValues={
                 {
-                    nameHardware: '',
+                    name: '',
                     date: '',
-                    statusFix: ''
+                    status: ''
                 }
             }
             validationSchema={Yup.object(
                 {
-                    nameHardware: Yup.string()
+                    name: Yup.string()
                                     .min(3, 'Минимум 3 символа!')
                                     .required('Обязательное поле!'),
                     date: Yup.date().required('Обязательное поле!'),
-                    statusFix: Yup.string()
+                    status: Yup.string()
                                 .min(3, 'Минимум 3 символа!')
                                 .required('Обязательное поле!'),
                 }
@@ -78,11 +80,11 @@ const Modal = () => {
             <Form className="modal">
                 <h2 className="modal__title">Изменение статуса</h2>
                 <div className="modal__input-wrapper">
-                    <label className="modal__label" htmlFor="nameHardware">Название оборудования</label>
-                    <ErrorForm className="modal__error" name="nameHardware" component="div" />
+                    <label className="modal__label" htmlFor="name">Название оборудования</label>
+                    <ErrorForm className="modal__error" name="name" component="div" />
                     <Field
-                        id="nameHardware"
-                        name="nameHardware"
+                        id="name"
+                        name="name"
                         className="modal__input"
                         type="text"
                     />
@@ -94,15 +96,15 @@ const Modal = () => {
                         className="modal__input"
                         type="date"
                     />
-                    <label className="modal__label" htmlFor="statusFix">Статус ремонта</label>
-                    <ErrorForm className="modal__error" name="statusFix" component="div" />
+                    <label className="modal__label" htmlFor="status">Статус ремонта</label>
+                    <ErrorForm className="modal__error" name="status" component="div" />
                     {
                         pathname === urlStatusRepaired ? 
                             <Field
                                 className="modal__input"
-                                id="statusFix"
-                                name="statusFix"
-                                type="statusFix"
+                                id="status"
+                                name="status"
+                                type="status"
                                 as="select"
                                 >
                                     <option value="">Выберите статус</option>
@@ -115,9 +117,9 @@ const Modal = () => {
                         :
                             <Field
                                 className="modal__input"
-                                id="statusFix"
-                                name="statusFix"
-                                type="statusFix"
+                                id="status"
+                                name="status"
+                                type="status"
                                 as="select"
                                 >
                                     <option value="">Выберите статус</option>

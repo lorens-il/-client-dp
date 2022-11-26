@@ -1,22 +1,30 @@
-import { useGetStatusOrderedQuery, useDeleteStatusOrderedMutation } from '../../api/apiQuery';
+import {useQuery, useMutation} from "@apollo/client"
 import useChangeStatusList from '../../hooks/useChangeStatusList';
+import { GET_ALL_HARDWARE, DELETE_HARDWARE } from '../../api/apollo/hardware';
 
 const ListStatusOrderedHardware = () => {
 
-    const { 
-        data: hardware = [], 
-        isLoading, 
-        isError 
-    } = useGetStatusOrderedQuery();
+    // const { 
+    //     data: hardware = [], 
+    //     isLoading, 
+    //     isError 
+    // } = useGetStatusOrderedQuery();
 
-    const [delHardware] = useDeleteStatusOrderedMutation();
+    const {
+        data: {getAllHardware: hardware = []} = {hardware: []}, 
+        loading,
+        error 
+    } = useQuery(GET_ALL_HARDWARE);
+
+    const [delHardware] = useMutation(DELETE_HARDWARE);
+
 
     const changeStatusList = useChangeStatusList();
 
     const deletingHardwareById = id => {
-        delHardware(id);
+        delHardware({variables: {id}});
     };
-
+    
     const listCreatings = (hardware) => {
 
         if (hardware.length === 0) {
@@ -26,18 +34,18 @@ const ListStatusOrderedHardware = () => {
                 </tr>
             );
         }
-
-        return hardware.map(({ id, nameHardware, date, statusFix }) => (
+        
+        return hardware.map(({ id, name, Date, status }) => (
             <tr key={id}>
-                <td>{nameHardware}</td>
-                <td>{date}</td>
-                <td>{statusFix}</td>
+                <td>{name}</td>
+                <td>{new Intl.DateTimeFormat().format(Date.date)}</td>
+                <td>{status}</td>
                 <td className="list-status__wrapper-management">
                     <button
                         className="btn btn-warning list-status__btn list-status__btn_small"
                         onClick={() => changeStatusList(id)}
                         >
-                        Внести изменения
+                        {"Внести изменения"}
                     </button>
                     <button
                         className="btn btn-danger list-status__btn list-status__btn_small"
