@@ -1,24 +1,25 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import { useGetTrainingMaterialQuery } from '../../api/apiQuery';
+import {useQuery} from "@apollo/client"
+import {GET_TRAINING_MATERIAL} from '../../api/apollo/trainingMaterial'
+
 
 import './trainingMaterial.sass';
 
 const TrainingMaterial = () => {
 
     const {
-        data: materials = [],
-        isLoading,
-        isError
-    } = useGetTrainingMaterialQuery();
-
+        data: {getTrainingMaterial: materials = []} = {materials: []}, 
+        loading,
+        error 
+    } = useQuery(GET_TRAINING_MATERIAL);
 
     const materialCreatings = (materials) => (
-        materials.map(({id, title, text}) => (
+        materials.map(({id, title, desc}) => (
             <Accordion.Item key={id} eventKey={id}>
                 <Accordion.Header>{title}</Accordion.Header>
                 <Accordion.Body>
-                    {text}
+                    {desc}
                 </Accordion.Body>
             </Accordion.Item>
         ))

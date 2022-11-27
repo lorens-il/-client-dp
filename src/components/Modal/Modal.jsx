@@ -1,10 +1,6 @@
 import { Formik, Form, Field, ErrorMessage as ErrorForm } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { 
-    useChangeStatusReparedMutation, 
-    useAddStatusReparedMutation
-} from "../../api/apiQuery";
 import {useMutation} from "@apollo/client";
 import { ADD_HARDWARE, UPDATE_HARDWARE } from "../../api/apollo/hardware";
 import {setShowModal} from "../pages/ListStatus/listStatusSlice";
@@ -14,8 +10,7 @@ import "./Modal.sass";
 
 const Modal = () => {
     
-    // const [addStatusRepared] = useAddStatusReparedMutation();
-    // const [changeStatusRepared] = useChangeStatusReparedMutation();
+
     const [addStatus] = useMutation(ADD_HARDWARE);
     const [changeStatus] = useMutation(UPDATE_HARDWARE);
 

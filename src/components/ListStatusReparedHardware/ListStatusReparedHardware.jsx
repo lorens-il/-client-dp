@@ -4,11 +4,6 @@ import { GET_ALL_HARDWARE, DELETE_HARDWARE } from '../../api/apollo/hardware';
 
 const ListStatusReparedHardware = () => {
     
-    // const {
-    //     data: hardware = [],
-    //     isLoading,
-    //     isError
-    // } = useGetStatusReparedQuery();
     
     const {
         data: {getAllHardware: hardware = []} = {hardware: []}, 
