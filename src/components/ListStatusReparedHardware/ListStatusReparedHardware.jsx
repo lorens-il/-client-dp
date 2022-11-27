@@ -1,20 +1,27 @@
-import {useGetStatusReparedQuery, useDeleteStatusReparedMutation} from "../../api/apiQuery";
+import {useQuery, useMutation} from "@apollo/client"
 import useChangeStatusList from "../../hooks/useChangeStatusList";
+import { GET_ALL_HARDWARE, DELETE_HARDWARE } from '../../api/apollo/hardware';
 
 const ListStatusReparedHardware = () => {
     
-    const {
-        data: hardware = [],
-        isLoading,
-        isError
-    } = useGetStatusReparedQuery();
+    // const {
+    //     data: hardware = [],
+    //     isLoading,
+    //     isError
+    // } = useGetStatusReparedQuery();
     
-    const [delHardware] = useDeleteStatusReparedMutation();
+    const {
+        data: {getAllHardware: hardware = []} = {hardware: []}, 
+        loading,
+        error 
+    } = useQuery(GET_ALL_HARDWARE, {variables: {category: "repaired"}});
+
+    const [delHardware] = useMutation(DELETE_HARDWARE);
 
     const changeStatusList = useChangeStatusList();
 
     const deletingHardwareById = id => {
-        delHardware(id);
+        delHardware({variables: {id}});
     }
 
     const listCreatings = (hardware) => {
@@ -27,13 +34,11 @@ const ListStatusReparedHardware = () => {
                 )
             }
 
-            return hardware.map(({id, nameHardware, date, statusFix}) => (
+            return hardware.map(({id, name, Date, status}) => (
                 <tr key={id}>
-                    <td>{nameHardware}</td>
-                    <td>{date}</td>
-                    <td>
-                        {statusFix}
-                    </td>
+                    <td>{name}</td>
+                    <td>{new Intl.DateTimeFormat().format(Date.date)}</td>
+                    <td>{status}</td>
                     <td className="list-status__wrapper-management">
                         <button 
                             className="btn btn-warning list-status__btn list-status__btn_small" 

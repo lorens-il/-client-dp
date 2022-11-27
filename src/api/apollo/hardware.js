@@ -18,8 +18,8 @@ export const ADD_HARDWARE = gql`
 `;
 
 export const GET_ALL_HARDWARE = gql`
-    query {
-        getAllHardware {
+    query ($category: String){
+        getAllHardware(category: $category) {
             id
             name
             status

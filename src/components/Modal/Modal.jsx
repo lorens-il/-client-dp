@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { 
     useChangeStatusReparedMutation, 
-    useAddStatusReparedMutation, 
-    useAddStatusOrderedMutation
+    useAddStatusReparedMutation
 } from "../../api/apiQuery";
 import {useMutation} from "@apollo/client";
 import { ADD_HARDWARE, UPDATE_HARDWARE } from "../../api/apollo/hardware";
@@ -15,10 +14,10 @@ import "./Modal.sass";
 
 const Modal = () => {
     
-    const [addStatusRepared] = useAddStatusReparedMutation();
-    const [changeStatusRepared] = useChangeStatusReparedMutation();
-    const [addStatusOrdered] = useMutation(ADD_HARDWARE);
-    const [changeStatusOrdered] = useMutation(UPDATE_HARDWARE);
+    // const [addStatusRepared] = useAddStatusReparedMutation();
+    // const [changeStatusRepared] = useChangeStatusReparedMutation();
+    const [addStatus] = useMutation(ADD_HARDWARE);
+    const [changeStatus] = useMutation(UPDATE_HARDWARE);
 
     const {statusId, varSendMethod} = useSelector(state => state.listStatus);
     const dispatch = useDispatch();
@@ -37,17 +36,17 @@ const Modal = () => {
         };
 
         if (varSendMethod === "PUT" && pathname === urlStatusRepaired) {
-            changeStatusRepared(newStatus);
+            changeStatus({variables: {input: newStatus}});
         }
         if (varSendMethod === "PUT" && pathname === urlStatusOrdered) {
-            changeStatusOrdered({variables: {input: newStatus}});
+            changeStatus({variables: {input: newStatus}});
         }
 
         if (varSendMethod === "POST" && pathname === urlStatusRepaired) {
-            addStatusRepared(newStatus);
+            addStatus({variables: {input: newStatus}});
         }
         if (varSendMethod === "POST" && pathname === urlStatusOrdered) {
-            addStatusOrdered({variables: {input: newStatus}});
+            addStatus({variables: {input: newStatus}});
         }
 
         dispatch(setShowModal(false));

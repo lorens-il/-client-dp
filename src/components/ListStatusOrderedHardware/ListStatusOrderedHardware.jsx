@@ -14,7 +14,7 @@ const ListStatusOrderedHardware = () => {
         data: {getAllHardware: hardware = []} = {hardware: []}, 
         loading,
         error 
-    } = useQuery(GET_ALL_HARDWARE);
+    } = useQuery(GET_ALL_HARDWARE, {variables: {category: "ordered"}});
 
     const [delHardware] = useMutation(DELETE_HARDWARE);
 
@@ -45,7 +45,7 @@ const ListStatusOrderedHardware = () => {
                         className="btn btn-warning list-status__btn list-status__btn_small"
                         onClick={() => changeStatusList(id)}
                         >
-                        {"Внести изменения"}
+                        Внести изменения
                     </button>
                     <button
                         className="btn btn-danger list-status__btn list-status__btn_small"
