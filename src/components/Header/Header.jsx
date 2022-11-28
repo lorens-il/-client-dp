@@ -1,8 +1,11 @@
 import "./header.sass";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
 
+    const {pathname} = useLocation();
+    
     return (
         <header className="header bg-warning">
             <nav className="header__nav">
@@ -13,7 +16,7 @@ const Header = () => {
                     <Link to="/about">О компании</Link>
                 </div>
                 <div className="header__wrapper-menu">
-                    <Link to="/">Вход</Link>   
+                    <Link to="/">{pathname === '/' ? 'Вход' : 'Выход'}</Link>   
                 </div>
             </nav>
         </header>

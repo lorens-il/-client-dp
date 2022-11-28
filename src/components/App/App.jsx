@@ -6,6 +6,7 @@ import TrainingMaterial from '../TrainingMaterial/TrainingMaterial';
 import ListStatusReparedHardware from '../ListStatusReparedHardware/ListStatusReparedHardware';
 import ListStatusOrderedHardware from '../ListStatusOrderedHardware/ListStatusOrderedHardware';
 import AboutCompany from '../pages/AboutCompany/AboutCompany';
+import Auth from '../pages/Auth/Auth';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header/>
         <main>
         <Routes>
+            <Route path='/' element={<Auth/>}/>
             <Route 
                 path='/status-repaired-hardware' 
                 element={
