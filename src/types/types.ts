@@ -15,4 +15,18 @@ export type DateT = {
     HardwareId: number;
 };
 
-export type SortProps = { dataSort: { name: string; dataType: string }[] };
+
+export enum DataType {
+    DATE_ASC = "date-asc",
+    DATE_DESC = "date-desc",
+    ALPABLET_ASC = "alphablet-asc",
+    ALPABLET_DESC = "alphablet-desc"
+}
+
+export type SortProps = {
+    dataSort: { name: string; dataType: string }[];
+}
+export type PopupProps = SortProps & {
+    openSort: boolean
+    setOpenSort(openSort: boolean): void;
+};

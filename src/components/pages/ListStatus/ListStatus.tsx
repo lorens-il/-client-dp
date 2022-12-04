@@ -6,18 +6,20 @@ import { Table } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 import Modal from '../../Modal/Modal';
+import Sort from '../../Sort/Sort';
+import { DataType } from '../../../types/types';
 import useChangeStatusList from '../../../hooks/useChangeStatusList';
 
 import './listStatus.sass';
-import Sort from '../../Sort/Sort';
+
 
 const ListStatus: FC<PropsWithChildren> = (props): JSX.Element => {
 
     const [dataSort] = useState([
-        { name: 'Дата ASC', dataType: 'date-asc' },
-        { name: 'Дата DESC', dataType: 'date-desc' },
-        {name: "Алфавит ASC", dataType: "abc-asc"},
-        {name: "Алфавит DESC", dataType: "abc-desc"}
+        {name: 'Дата DESC', dataType: DataType.DATE_DESC },
+        {name: 'Дата ASC', dataType: DataType.DATE_ASC },
+        {name: "Алфавит DESC", dataType: DataType.ALPABLET_DESC },
+        {name: "Алфавит ASC", dataType: DataType.ALPABLET_ASC }
     ]);
     
     const { showModal } = useAppSelector((state) => state.listStatus);

@@ -33,6 +33,8 @@
                 fill: var(--bs-danger)
     &__popup
         position: absolute
+        opacity: 0
+        visibility: hidden
         right: 0
         top: 130%
         border-radius: 10px
@@ -42,6 +44,7 @@
         list-style: none
         overflow: hidden
         padding: 0
+        transition-duration: 0.5s
         li
             padding: 10px
             font-weight: 600
@@ -84,7 +87,11 @@
         left: 0%
         top: 0%
         background: rgba(0,0,0, 0.5)
-        
+
+.active__popup
+    opacity: 100%
+    visibility: visible
+
 .active
     display: block
 
