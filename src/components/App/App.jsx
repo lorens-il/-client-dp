@@ -7,6 +7,7 @@ import ListStatusReparedHardware from '../ListStatusReparedHardware/ListStatusRe
 import ListStatusOrderedHardware from '../ListStatusOrderedHardware/ListStatusOrderedHardware';
 import AboutCompany from '../pages/AboutCompany/AboutCompany';
 import Auth from '../pages/Auth/Auth';
+import jwtDecode from "jwt-decode"
 
 function App() {
   return (
