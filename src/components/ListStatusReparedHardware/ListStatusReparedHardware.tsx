@@ -3,6 +3,8 @@ import useChangeStatusList from '../../hooks/useChangeStatusList';
 import { GET_ALL_HARDWARE, DELETE_HARDWARE } from '../../api/apollo/hardware';
 import { Hardware } from '../../types/types';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/typedSelectors';
+import useSort from '../../hooks/useSort';
 
 const ListStatusReparedHardware: FC = (): JSX.Element => {
     const {
@@ -10,6 +12,10 @@ const ListStatusReparedHardware: FC = (): JSX.Element => {
         loading,
         error,
     } = useQuery(GET_ALL_HARDWARE, { variables: { category: 'repaired' } });
+
+    const { sortType } = useAppSelector((state) => state.sortTypeReducer);
+
+    const sortedHardware = useSort(hardware, sortType);
 
     const [delHardware] = useMutation(DELETE_HARDWARE);
 
@@ -19,8 +25,8 @@ const ListStatusReparedHardware: FC = (): JSX.Element => {
         delHardware({ variables: { id } });
     };
 
-    const listCreatings = (hardware: Hardware[]) => {
-        if (hardware.length === 0) {
+    const listCreatings = (sortedHardware: Hardware[]) => {
+        if (sortedHardware.length === 0) {
             return (
                 <tr className="list-status__empty">
                     <td>Статусов нет</td>
@@ -28,7 +34,7 @@ const ListStatusReparedHardware: FC = (): JSX.Element => {
             );
         }
 
-        return hardware.map(({ id, name, Date, status }) => (
+        return sortedHardware.map(({ id, name, Date, status }) => (
             <tr key={id}>
                 <td>{name}</td>
                 <td>{new Intl.DateTimeFormat().format(Date.date)}</td>
@@ -49,7 +55,7 @@ const ListStatusReparedHardware: FC = (): JSX.Element => {
         ));
     };
 
-    const list = listCreatings(hardware);
+    const list = listCreatings(sortedHardware);
 
     return <>
                 {list}

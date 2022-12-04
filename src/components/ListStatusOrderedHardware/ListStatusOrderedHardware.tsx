@@ -3,14 +3,21 @@ import useChangeStatusList from '../../hooks/useChangeStatusList';
 import { GET_ALL_HARDWARE, DELETE_HARDWARE } from '../../api/apollo/hardware';
 import { FC } from 'react';
 import { Hardware } from '../../types/types';
+import useSort from '../../hooks/useSort';
+import { useAppSelector } from '../../hooks/typedSelectors';
 
 const ListStatusOrderedHardware: FC = (): JSX.Element => {
+    
     const {
         data: { getAllHardware: hardware = [] } = { hardware: [] }, // если деструктурировать не вышло то равно {hardware: []}
         loading,
         error,
     } = useQuery(GET_ALL_HARDWARE, { variables: { category: 'ordered' } });
 
+    const { sortType } = useAppSelector((state) => state.sortTypeReducer);
+
+    const sortedHardware = useSort(hardware, sortType);
+    
     const [delHardware] = useMutation(DELETE_HARDWARE);
 
     const changeStatusList = useChangeStatusList();
@@ -19,16 +26,16 @@ const ListStatusOrderedHardware: FC = (): JSX.Element => {
         delHardware({ variables: { id } });
     };
 
-    const listCreatings = (hardware: Hardware[]) => {
-        if (hardware.length === 0) {
+    const listCreatings = (sortedHardware: Hardware[]) => {
+        if (sortedHardware.length === 0) {
             return (
                 <tr className="list-status__empty">
                     <td>Статусов нет</td>
                 </tr>
             );
         }
-        // ПОЛУЧИТЬ ХАРДВАРЕ, ОТСОРТИРОВАТЬ ПО DATE И ОТСОРТИРОВАННЫЙ МАССИВ ПИХНУТЬ В MAP, МБ ФУНКЦИОНАЛ СОРТИРОВКИ СТОИТ ПИХНУТЬ В ХУК, КОТОРЫЙ БУДЕТ ВОЗВРАЩАТЬ ОТСОРТИРОВАННЫЙ МАССИВ.
-        return hardware.map(({ id, name, Date, status }) => (
+
+        return sortedHardware.map(({ id, name, Date, status }) => (
             <tr key={id}>
                 <td>{name}</td>
                 <td>{new Intl.DateTimeFormat().format(Date.date)}</td>
@@ -49,7 +56,7 @@ const ListStatusOrderedHardware: FC = (): JSX.Element => {
         ));
     };
 
-    const list = listCreatings(hardware);
+    const list = listCreatings(sortedHardware);
 
     return <>
                 {list}
